@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+// We don't use these live functions in the mock, but we keep the imports for type clarity
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth"; 
 
+// --- INTERFACE CORRECTIONS ---
 export interface Project {
-  id: number;
+  id: number; // Corrected: Must be present
   name: string;
   description?: string;
   startDate?: string;
@@ -25,11 +27,11 @@ export enum Status {
 }
 
 export interface User {
-  userId?: number;
+  userId: number; // Corrected: Primary key, should be required on a fetched object
   username: string;
-  email: string;
+  email: string; // Assuming email is derived from Cognito, treat as required
   profilePictureUrl?: string;
-  cognitoId?: string;
+  cognitoId: string; // Corrected: Unique ID, should be required
   teamId?: number;
 }
 
@@ -52,7 +54,7 @@ export interface Task {
   dueDate?: string;
   points?: number;
   projectId: number;
-  authorUserId?: number;
+  authorUserId: number; // Corrected: Required based on Prisma schema
   assignedUserId?: number;
 
   author?: User;
@@ -68,21 +70,35 @@ export interface SearchResults {
 }
 
 export interface Team {
-  teamId: number;
+  id: number; // Corrected: Primary key is 'id' in Prisma
   teamName: string;
   productOwnerUserId?: number;
   projectManagerUserId?: number;
+  // Added fields returned by the mocked getTeams controller:
+  productOwnerUsername?: string;
+  projectManagerUsername?: string;
 }
+
+// Define the shape of the successful response (e.g., a message and the processed data count)
+export interface UploadResponse {
+  message: string;
+  count: number;
+}
+// -----------------------------
+
+// --- MOCK CONSTANTS FOR AUTH ---
+const MOCK_COGNITO_ID = "123e4567-e89b-12d3-a456-426614174001"; // Bharath Raj' cognitoId
+const MOCK_USER_ID = 1; // Bharath Raj' userId
+// -----------------------------
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    // --- MOCKING: Bypass live Amplify fetch and hardcode a valid token/no token ---
     prepareHeaders: async (headers) => {
-      const session = await fetchAuthSession();
-      const { accessToken } = session.tokens ?? {};
-      if (accessToken) {
-        headers.set("Authorization", `Bearer ${accessToken}`);
-      }
+      // For local development, we simulate having a token to satisfy middleware checks.
+      // If your mock backend doesn't validate tokens, you can use a placeholder.
+      headers.set("Authorization", `Bearer MOCK_ACCESS_TOKEN`); 
       return headers;
     },
   }),
@@ -90,22 +106,26 @@ export const api = createApi({
   tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   endpoints: (build) => ({
     getAuthUser: build.query({
-      queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
-        try {
-          const user = await getCurrentUser();
-          const session = await fetchAuthSession();
-          if (!session) throw new Error("No session found");
-          const { userSub } = session;
-          const { accessToken } = session.tokens ?? {};
+      // --- MOCKING: Replace all live Amplify and API calls with mock data ---
+      queryFn: async () => {
+        // This object simulates the successful response required by your components.
+        const mockUserDetails: User = {
+          userId: MOCK_USER_ID,
+          username: "Bharath Raj",
+          email: "alice@quantum.com", 
+          cognitoId: MOCK_COGNITO_ID,
+          teamId: 1,
+        };
 
-          const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
-          const userDetails = userDetailsResponse.data as User;
-
-          return { data: { user, userSub, userDetails } };
-        } catch (error: any) {
-          return { error: error.message || "Could not fetch user data" };
-        }
+        return {
+          data: {
+            user: { username: "Bharath Raj" }, // Mocked getCurrentUser result
+            userSub: MOCK_COGNITO_ID, // Mocked userSub
+            userDetails: mockUserDetails, // Mocked user details from your backend
+          },
+        };
       },
+      providesTags: ["Users"],
     }),
     getProjects: build.query<Project[], void>({
       query: () => "projects",
@@ -162,6 +182,19 @@ export const api = createApi({
     search: build.query<SearchResults, string>({
       query: (query) => `search?query=${query}`,
     }),
+    uploadFile: build.mutation<UploadResponse, FormData>({
+      query: (formData) => ({
+        // Assuming your FastAPI/Node backend has an endpoint for file upload
+        url: "upload/data",
+        method: "POST",
+        body: formData,
+        // When sending FormData, explicitly setting 'Content-Type' is often NOT necessary 
+        // and can cause issues; the browser handles it correctly.
+      }),
+  // If the uploaded file should immediately affect tasks/projects lists, 
+  // you would invalidate the relevant tags here:
+  // invalidatesTags: ["Projects", "Tasks"], 
+}),
   }),
 });
 
@@ -176,4 +209,5 @@ export const {
   useGetTeamsQuery,
   useGetTasksByUserQuery,
   useGetAuthUserQuery,
+  useUploadFileMutation,
 } = api;

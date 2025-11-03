@@ -2,13 +2,20 @@ import React from "react";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
+  
+// -----------------------------------------------------------
+// MOCK TOGGLE (Set to true to bypass Cognito)
+const IS_MOCK_AUTH_ENABLED = true;
+// -----------------------------------------------------------
 
+
+// Amplify configuration (kept for structure, but bypassed if MOCK_AUTH is true)
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || "",
+      userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || "MOCK_POOL_ID",
       userPoolClientId:
-        process.env.NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID || "",
+        process.env.NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID || "MOCK_CLIENT_ID",
     },
   },
 });
@@ -43,6 +50,13 @@ const formFields = {
 };
 
 const AuthProvider = ({ children }: any) => {
+
+  // Conditional Rendering Logic: Always render children in mock mode
+  if (IS_MOCK_AUTH_ENABLED) {
+    return <div>{children}</div>;
+  }
+
+  // Fallback to real Authenticator if mock is disabled
   return (
     <div>
       <Authenticator formFields={formFields}>

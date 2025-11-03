@@ -1,24 +1,24 @@
 [
   {
-    "username": "AliceJones",
+    "username": "Bharath Raj",
     "teamId": 1,
     "profilePictureUrl": "p1.jpeg",
     "cognitoId": "123e4567-e89b-12d3-a456-426614174001"
   },
   {
-    "username": "BobSmith",
+    "username": "Priya",
     "teamId": 2,
     "profilePictureUrl": "p2.jpeg",
     "cognitoId": "123e4567-e89b-12d3-a456-426614174002"
   },
   {
-    "username": "CarolWhite",
+    "username": "Hitesh",
     "teamId": 3,
     "profilePictureUrl": "p3.jpeg",
     "cognitoId": "123e4567-e89b-12d3-a456-426614174003"
   },
   {
-    "username": "DaveBrown",
+    "username": "Naveen",
     "teamId": 4,
     "profilePictureUrl": "p4.jpeg",
     "cognitoId": "213b7530-1031-70e0-67e9-fe0805e18fb3"
@@ -54,13 +54,13 @@
     "cognitoId": "123e4567-e89b-12d3-a456-426614174009"
   },
   {
-    "username": "JohnDoe",
+    "username": "bharath",
     "teamId": 5,
     "profilePictureUrl": "p10.jpeg",
     "cognitoId": "123e4567-e89b-12d3-a456-426614174010"
   },
   {
-    "username": "LauraAdams",
+    "username": "Vivek",
     "teamId": 1,
     "profilePictureUrl": "p11.jpeg",
     "cognitoId": "123e4567-e89b-12d3-a456-426614174011"

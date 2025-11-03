@@ -1,26 +1,26 @@
 [
   {
-    "teamName": "Quantum Innovations",
+    "teamName": "BSR",
     "productOwnerUserId": 11,
     "projectManagerUserId": 2
   },
   {
-    "teamName": "Nebula Research",
+    "teamName": "GDT",
     "productOwnerUserId": 13,
     "projectManagerUserId": 4
   },
   {
-    "teamName": "Orion Solutions",
+    "teamName": "Analytics",
     "productOwnerUserId": 15,
     "projectManagerUserId": 6
   },
   {
-    "teamName": "Krypton Developments",
+    "teamName": "Devops",
     "productOwnerUserId": 17,
     "projectManagerUserId": 8
   },
   {
-    "teamName": "Zenith Technologies",
+    "teamName": "Automation",
     "productOwnerUserId": 19,
     "projectManagerUserId": 10
   }

@@ -26,7 +26,7 @@ const Timeline = () => {
         name: project.name,
         id: `Project-${project.id}`,
         type: "project" as TaskTypeItems,
-        progress: 50,
+        progress: 0,
         isDisabled: false,
       })) || []
     );
@@ -69,8 +69,8 @@ const Timeline = () => {
             {...displayOptions}
             columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
             listCellWidth="100px"
-            projectBackgroundColor={isDarkMode ? "#101214" : "#1f2937"}
-            projectProgressColor={isDarkMode ? "#1f2937" : "#aeb8c2"}
+            projectBackgroundColor={isDarkMode ? "#00AA8C" : "#FFC800"}
+            projectProgressColor={isDarkMode ? "#74D22C" : "#8CE650 "}
             projectProgressSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
           />
         </div>
