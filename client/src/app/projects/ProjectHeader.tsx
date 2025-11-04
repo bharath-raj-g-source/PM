@@ -43,25 +43,25 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
       <div className="flex flex-wrap-reverse gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center">
         <div className="flex flex-1 items-center gap-2 md:gap-4">
           <TabButton
-            name="Board"
+            name="Global Master BSR Checks"
             icon={<Grid3x3 className="h-5 w-5" />}
             setActiveTab={setActiveTab}
             activeTab={activeTab}
           />
           <TabButton
-            name="List"
+            name="Local Market Checks"
             icon={<List className="h-5 w-5" />}
             setActiveTab={setActiveTab}
             activeTab={activeTab}
           />
           <TabButton
-            name="Timeline"
+            name="Estimations"
             icon={<Clock className="h-5 w-5" />}
             setActiveTab={setActiveTab}
             activeTab={activeTab}
           />
           <TabButton
-            name="Table"
+            name="Rates and Rating"
             icon={<Table className="h-5 w-5" />}
             setActiveTab={setActiveTab}
             activeTab={activeTab}

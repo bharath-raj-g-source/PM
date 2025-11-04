@@ -118,7 +118,7 @@ import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
 const mockUser = {
   data: {
     userDetails: {
-      username: "Mock User (Dev Mode)",
+      username: "Bharath Raj",
       profilePictureUrl: null, // Set to null to use the generic User icon
     },
   },
