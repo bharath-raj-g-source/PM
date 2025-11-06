@@ -225,7 +225,6 @@
 
 // export default Sidebar;
 
-
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
@@ -250,7 +249,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-// import Image from "next/image"; // Commented out
+import Image from "next/image"; // Re-added Image import
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -304,8 +303,8 @@ const Sidebar = () => {
       <div className="flex h-[100%] w-full flex-col justify-start">
         {/* TOP LOGO */}
         <div className="z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
-          <div className="text-xl font-bold text-gray-800 dark:text-white">
-            Automation@Nielsen
+          <div className="text-xl font-bold text-gray-800 dark:text-white pl-14">
+            Sports 
           </div>
           {isSidebarCollapsed ? null : (
             <button
@@ -321,13 +320,18 @@ const Sidebar = () => {
         {/* TEAM */}
         <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
           
-          {/* Replaced Image component with a static element/icon since Image import is removed */}
-          <div className="h-10 w-10 flex items-center justify-center bg-gray-200 rounded-lg">
-            <Layers3 className="h-6 w-6 text-gray-700" />
-          </div>
+          {/* LOGO IMAGE (Restored) */}
+          <Image
+            src="/logo_n2.png"
+            alt="Logo1"
+            width={60}
+            height={60}
+            className="rounded-lg" 
+          />
+          
           <div>
             <h3 className="text-md font-bold tracking-wide dark:text-gray-200">
-              Automation TEAM
+              Nielsen
             </h3>
             <div className="mt-1 flex items-start gap-2">
               <LockIcon className="mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400" />
