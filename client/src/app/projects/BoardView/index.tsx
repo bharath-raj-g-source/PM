@@ -267,7 +267,8 @@ import { useAppSelector } from "@/app/redux";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils"; 
 
 // --- CONFIGURATION ---
-const BACKEND_URL = "http://localhost:8000"; 
+// const BACKEND_URL = "http://localhost:8000"; 
+  const BACKEND_URL = "https://dashboard-backend-0wo1.onrender.com"
 
 // --- MOCK DATA FOR AVAILABLE CHECKS (No change) ---
 const availableChecks = [
