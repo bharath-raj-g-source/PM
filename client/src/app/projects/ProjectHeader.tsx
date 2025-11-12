@@ -143,7 +143,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
       />
       <div className="pb-6 pt-6 lg:pb-4 lg:pt-8">
         <Header
-          name="Project Design Development"
+          name="Quality Checks Automation"
           buttonComponent={
             <button
               className="flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
